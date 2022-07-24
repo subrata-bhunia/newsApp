@@ -1,0 +1,133 @@
+<ProgressSteps {...progressStepsStyle}>
+  {/* CMN */}
+  <ProgressStep
+    // label="Choose Mobile No"
+    onNext={onPaymentStepComplete}
+    onPrevious={onPrevStep}
+    removeBtnRow
+    scrollViewProps={defaultScrollViewProps}>
+    <View style={{}}>
+      <View
+        style={{
+          marginTop: normalize(40),
+        }}>
+        <TextInputCustom
+          height={normalize(50)}
+          placeholder="Enter Mobile No"
+          width={'90%'}
+          borderWidth={2}
+          borderColor={darkMode ? COLORS.dark_text_color : COLORS.dark_gradient}
+          borderRadius={normalize(10)}
+          keyboardType="phone-pad"
+          placeholderTextColor={
+            darkMode ? COLORS.dark_text_color : COLORS.dark_gradient
+          }
+          maxLength={10}
+          // marginVertical={normalize(40)}
+          value={mobile}
+          onChangeText={txt => phonenumber(txt)}
+        />
+        <View style={{margin: normalize(10)}}>
+          <Text
+            style={{
+              fontFamily: FONTS.Poppins_700,
+              fontSize: normalize(16),
+              color: darkMode ? COLORS.dark_text_color : COLORS.dark_gradient,
+            }}>
+            Your Contacts
+          </Text>
+          <ScrollView>
+            {contactList.length > 0 ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  alignSelf: 'center',
+                }}>
+                {contactList.map((_, index) => {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => console.log(_)}
+                      style={{
+                        alignItems: 'center',
+                        margin: normalize(5),
+                      }}>
+                      <Image
+                        source={{uri: _?.thumbnailPath}}
+                        style={{
+                          height: normalize(60),
+                          width: normalize(60),
+                          borderRadius: normalize(60),
+                          resizeMode: 'contain',
+                        }}
+                      />
+                      <Text>{_?.givenName}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            ) : (
+              <View
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: height / 2,
+                }}>
+                <Text
+                  style={{
+                    fontFamily: FONTS.Poppins_500,
+                    color: darkMode
+                      ? COLORS.dark_text_color
+                      : COLORS.dark_gradient,
+                  }}>
+                  We are cannot access your contact.
+                </Text>
+                <TouchableOpacity onPress={ContactsPermission}>
+                  <Text
+                    style={{
+                      color: 'red',
+                      textDecorationLine: 'underline',
+                      fontFamily: FONTS.Poppins_800I,
+                      fontSize: normalize(15),
+                    }}>
+                    Show Contacts?
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </ScrollView>
+        </View>
+      </View>
+    </View>
+  </ProgressStep>
+  {/* SOC */}
+  <ProgressStep
+    // label="Select Operator & Circle"
+    onNext={onNextStep}
+    onPrevious={onPrevStep}
+    scrollViewProps={defaultScrollViewProps}>
+    <View style={{alignItems: 'center'}}>
+      <Text>Shipping address step content</Text>
+    </View>
+  </ProgressStep>
+  {/* CP */}
+  <ProgressStep
+    // label="Choose Plan"
+    onNext={onNextStep}
+    onPrevious={onPrevStep}
+    scrollViewProps={defaultScrollViewProps}>
+    <View style={{alignItems: 'center'}}>
+      <Text>Billing address step content</Text>
+    </View>
+  </ProgressStep>
+  {/* P */}
+  <ProgressStep
+    // label="Payment"
+    onPrevious={onPrevStep}
+    onSubmit={onSubmitSteps}
+    scrollViewProps={defaultScrollViewProps}>
+    <View style={{alignItems: 'center'}}>
+      <Text>Confirm order step content</Text>
+    </View>
+  </ProgressStep>
+</ProgressSteps>;
